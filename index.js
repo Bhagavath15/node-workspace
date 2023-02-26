@@ -10,8 +10,7 @@ const PORT = 4000;
 
 const MONGO_URL = (process.env.MONGO_URL)
 console.log(process.env.MONGO_URL)
-// const MONGO_URL = "mongodb+srv://bhagavath15:Kumar1504@cluster0.89fnfou.mongodb.net"
-// const MONGO_URL = "mongodb://127.0.0.1"
+
 const client = new MongoClient(MONGO_URL) //dial
 await client.connect()
 console.log("Mongo is connected")
