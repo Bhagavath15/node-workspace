@@ -15,6 +15,7 @@ const client = new MongoClient(MONGO_URL) //dial
 await client.connect()
 console.log("Mongo is connected")
 
+app.use(express.json())
 
 app.get("/", function (request, response) {
   response.send("🙋‍♂️, 🌏 🎊✨🤩");
@@ -46,7 +47,7 @@ app.get('/movies/:id', async function (request, response) {
 
 
 //express-json()-middleware
-app.post("/movies", express.json(), async function (request, response) {
+app.post("/movies", async function (request, response) {
   const data = request.body
   console.log(data)
   //db.movies.insertMany()
@@ -67,7 +68,7 @@ app.delete('/movies/:id', async function (request, response) {
     : response.status(404).send({ message: "Movie is not found" })
 })
 
-app.put("/movies/:id", express.json(), async function (request, response) {
+app.put("/movies/:id", async function (request, response) {
   const { id } = request.params
   const data = request.body
   console.log(data)
