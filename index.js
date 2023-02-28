@@ -5,8 +5,8 @@ import express from "express"; //"type":"module"
 import { MongoClient } from "mongodb"
 import moviesRouter from "./router/movies.router.js";
 import usersRouter from "./router/users.router.js"
-import userRouter from "./router/user.router.js"
-import cors from "cors"
+import userRouter from "./router/user.router.js";
+import cors from "cors";
 
 const app = express();
 
