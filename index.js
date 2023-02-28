@@ -6,6 +6,7 @@ import { MongoClient } from "mongodb"
 import moviesRouter from "./router/movies.router.js";
 import usersRouter from "./router/users.router.js"
 import userRouter from "./router/user.router.js"
+import cors from "cors"
 
 const app = express();
 
@@ -20,6 +21,7 @@ export const client = new MongoClient(MONGO_URL) //dial
 await client.connect()
 console.log("Mongo is connected")
 
+app.use(cors())
 app.use(express.json())
 
 app.get("/", function (request, response) {
