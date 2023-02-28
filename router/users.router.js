@@ -1,14 +1,10 @@
 import express from "express";
-import { client } from "../index.js";
+import { getUsers, getUsersById, postUsers, deleteUser, updateUser } from "../service/users.service";
 
 const router = express.Router()
 
 router.get("/", async function (request, response) {
-    const users = await client
-        .db("users")
-        .collection("users")
-        .find({})
-        .toArray()
+    const users = await getUsers()
     console.log(users)
     response.send(users)
 })
@@ -18,16 +14,16 @@ router.get('/:id', async function (request, response) {
     // const movie = movies.find((mv) => mv.id === id)
     console.log(id)
 
-    const user = await client.db("users").collection("users").findOne({ id: id });
+    const user = await getUsersById(id);
     console.log(user)
-    movie ? response.send(user) : response.status(404).send({ message: "User is not found" })
+    user ? response.send(user) : response.status(404).send({ message: "User is not found" })
 })
 
 router.post("/", async function (request, response) {
     const datas = request.body
     console.log(datas)
     //db.movies.insertMany()
-    const result2 = await client.db("users").collection("users").insertMany(datas)
+    const result2 = await postUsers(datas)
     console.log(result2)
 })
 
@@ -36,7 +32,7 @@ router.delete('/:id', async function (request, response) {
     // const movie = movies.find((mv) => mv.id === id)
     console.log(id)
 
-    const result = await client.db("users").collection("users").deleteOne({ id: id });
+    const result = await deleteUser(id);
     console.log(result)
     result.deletedCount >= 1
         ? response.send({ message: "User deleted successfully" })
@@ -50,10 +46,12 @@ router.put("/:id", async function (request, response) {
     // const movie = movies.find((mv) => mv.id === id)
     console.log(id)
 
-    const result = await client.db("users").collection("users").updateOne({ id: id }, { $set: data });
+    const result = await updateUser(id, data);
     console.log(result)
     response.send(result)
 })
 
 
 export default router
+
+
