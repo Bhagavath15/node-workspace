@@ -56,4 +56,4 @@ router.put("/:id", async function (request, response) {
 })
 
 
-export default usersRouter
+export default router
