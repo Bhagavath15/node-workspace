@@ -7,7 +7,7 @@ export function deleteUser(id) {
     return client.db("workspace").collection("users").deleteOne({ id: id });
 }
 export function postUsers(datas) {
-    return client.db("workspace").collection("users").insertMany(datas);
+    return client.db("workspace").collection("users").insertOne(datas);
 }
 export function getUsersById(id) {
     return client.db("workspace").collection("users").findOne({ id: id });
