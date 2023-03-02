@@ -12,7 +12,11 @@ import { auth } from "../middleware/auth.js"
 const router = express.Router()
 
 router.get("/", auth, async function (request, response) {
-    const users = await getUsers()
+    console.log(request.query)
+    if (request.query.rating) {
+        request.query.rating = +request.query.rating
+    }
+    const users = await getUsers(request.query)
     console.log(users)
     response.send(users)
 })

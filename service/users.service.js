@@ -12,10 +12,10 @@ export function postUsers(datas) {
 export function getUsersById(id) {
     return client.db("workspace").collection("users").findOne({ id: id });
 }
-export function getUsers() {
+export function getUsers(query) {
     return client
         .db("workspace")
         .collection("users")
-        .find({})
+        .find(query)
         .toArray();
 }
