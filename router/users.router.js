@@ -7,16 +7,17 @@ import {
     updateUser
 }
     from "../service/users.service.js"
+import { auth } from "../middleware/auth.js"
 
 const router = express.Router()
 
-router.get("/", async function (request, response) {
+router.get("/", auth, async function (request, response) {
     const users = await getUsers()
     console.log(users)
     response.send(users)
 })
 
-router.get('/:id', async function (request, response) {
+router.get('/:id', auth, async function (request, response) {
     const { id } = request.params
     // const movie = movies.find((mv) => mv.id === id)
     console.log(id)
